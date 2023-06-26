@@ -1,2 +1,3 @@
 # system-design
- System design resources
+
+System design resources.
