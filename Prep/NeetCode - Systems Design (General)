@@ -31,6 +31,32 @@ System design notes from NeetCode courses
 
 ## 2. Networking
 
+### Networking Basics
+
+- A **network** is a collection of interconnected devices, such as computers, servers, routers, switches, and other networking equipment, that are linked together to facilitate communication and the sharing of resource
+- An **IP address** is a distinct numeric identifier (IPv4 - 32-bit and IPv6 - 128-bit) for every device connected to a network
+- **TCP packets** include an IP header (e.g., source and destination IP), TCP header (e.g., for sequencing), and application data
+- **Public networks** are accessible by internet where a public IP is granted by an ISP (Internet Service Provider) whereas a **private network** is only accessible within a LAN (local area network)
+- **Dynamic IPs** are assigned to a device each time a connection is established with a network whereas a **static IP** requires manual configuration
+- **Ports** are numeric identifiers (16-bit integer, 0-65535) used to distinguish between multiple applications or services running on a single device
+
+### TCP and UDP
+
+- TCP utilizes a **3-way handshake** (SYN - synchronize, SYN-ACK - synchronize acknowledgement, and ACK - acknowledgement) between devices to establish a connection and ensure lost packets are reliably delivered. However, this has the drawback of having more overhead
+- **UDP (User Datagram Protocol)** on the other hand, has faster data transfer as it does not attempt to resend lost packets or reorder them. A common use case for UDP is online gaming or video streaming
+
+### DNS
+
+- **DNS (Domain Name System)** is a decentralized _phone book_ which converts readable website names into numerical IPs. Coordination, security, and operation of domain names is managed by ICANN (Internet Corporation for Assigned Names and Numbers)
+- **Domain Name Registrars** (e.g., Google Domains, Route53, GoDaddy, etc.) maintain the DNS records and ensure domains are registered properly
+- An **A record** is a DNS record which associates a domain name with an IPv4 address
+- There are different types of protocols for URLs (uniform resource locators):
+  - HTTP/HTTPS (Hypertext Transfer Protocol) is the most common web protocol that governs communication between web browsers and servers and acts as a layer on top of TCP
+  - FTP (File Transfer Protocol) - used for accessing files and directories on a remote server
+  - SSH (Secure Shell) - used for establishing secure remote connections to another server
+- A domain consists of three parts: subdomain (e.g., `chat` in `https://chat.openai.com/`), domain (e.g., `openai.com` in `https://chat.openai.com/`), and top-level domain (e.g., `.com`)
+- A _path_ is denoted after a `/` and signifies a specific location or route within the website where particular content or resources are located
+
 ## 3. APIs
 
 ## 4. Caching Basics
