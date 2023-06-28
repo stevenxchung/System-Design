@@ -15,7 +15,7 @@ System design notes from NeetCode courses
 ### Application Architecture
 
 - **Vertical scaling** is when components within the same computer is being upgraded but has limitations in terms of hardware and availability
-- **Horizontal scaling** is typically the preferred approach of creating more servers to evenly distribute requests and ensure availability
+- **Horizontal scaling** is the preferred approach of creating more servers to evenly distribute requests and ensure availability
 - **Load balancers** evenly distributes incoming requests to groups of servers
 - **Logging** services provide a way to view application state history and activity. These are usually written to another external server for reliability
 - **Metric** services on the other hand, provide a view into the server environment (e.g., CPU usage, network traffic, etc.)
@@ -25,7 +25,7 @@ System design notes from NeetCode courses
 - System design can be boiled down to three points: moving, storing, and transforming data or **ETL (extract, transform, load)**
 - **Availability** is the percentage of time the system is up and running for a given period of time
 - **Reliability** is a system's ability to perform its intended operation without failure or errors over a given period of time
-- **Fault-tolerance** is how well the system can detect and heal itself from a problem (typically switching to another server). To achieve fault-tolerance requires a redundant server to be on standby. In most cases, systems use **active-active redundancy** where more than one server is active
+- **Fault-tolerance** is how well the system can detect and heal itself from a problem (switching to another server). To achieve fault-tolerance requires a redundant server to be on standby. In most cases, systems use **active-active redundancy** where more than one server is active
 - **Throughput** is the amount of data or operations a system can handle over some period of time
 - **Latency** is the delay between the client and server during a request/response
 
@@ -56,13 +56,3 @@ System design notes from NeetCode courses
   - SSH (Secure Shell) - used for establishing secure remote connections to another server
 - A domain consists of three parts: subdomain (e.g., `chat` in `https://chat.openai.com/`), domain (e.g., `openai.com` in `https://chat.openai.com/`), and top-level domain (e.g., `.com`)
 - A _path_ is denoted after a `/` and signifies a specific location or route within the website where particular content or resources are located
-
-## 3. APIs
-
-## 4. Caching Basics
-
-## 5. Proxies
-
-## 6. Storage
-
-## 7. Big Data
