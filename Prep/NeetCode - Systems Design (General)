@@ -56,3 +56,50 @@ System design notes from NeetCode courses
   - SSH (Secure Shell) - used for establishing secure remote connections to another server
 - A domain consists of three parts: subdomain (e.g., `chat` in `https://chat.openai.com/`), domain (e.g., `openai.com` in `https://chat.openai.com/`), and top-level domain (e.g., `.com`)
 - A _path_ is denoted after a `/` and signifies a specific location or route within the website where particular content or resources are located
+
+## 3. APIs
+
+### HTTP
+
+- **Client** refers to an application or system that access a service made available by a server. The client can be a web browser, an email software, an app on your phone, or any other software that needs to access some service
+- **Server** refers to a computer, device, or software the providers resources, data, services, or functionality to the client or other servers on a network
+- **RPC (remote procedure call)** provides the ability for a program to perform functions on another machine, making it a simple and efficient solution for task management in distributed systems, where programs operate across multiple computers
+- HTTP requests/responses can include a method (GET, POST, PUT, DELETE), URL, headers, and body (for POST and PUT). Regarding HTTP methods:
+  - **GET** methods are idempotent (no change of server state) so the act of retrieving the resource itself should not cause any modifications (no _side effects_)
+  - **POST** methods will send data to the server to create a new resource
+  - **PUT** methods are used to update a resource and is also idempotent (identical requests give the same result)
+  - **DELETE** methods will delete the specified data and is also idempotent
+- Common HTTP status codes include:
+  - 200: OK
+  - 201: Created
+  - 400: Bad Request
+  - 401: Unauthorized
+- **SSL/TLS (Secure Sockets Layer/Transport Security Layer)** are cryptographic protocols used to provide secure communication over a computer network. HTTPS is a combination of HTTP with TLS
+
+### WebSockets
+
+- **WebSockets** is a communication protocol that provides full-duplex communication channels over a single TCP connection. Both the client and the server can send data to each other simultaneously without the need for a request-response cycle once the initial connection has been established
+- The introduction of HTTP/2 allows for **multiplexing** - multiple requests in parallel can be initiated over a single TCP connection. However, this is not a perfect replacement to WebSocket
+
+### API Paradigms
+
+- The three most popular API paradigms are:
+
+  - **REST (Representational State Transfer)** which utilizes HTTP for communication between client and server
+    - Pros: REST APIs require a client-server architecture to enable independent development. Additionally, REST APIs are stateless - servers should not retain any details on previous client requests (no session or cookie management)
+    - Cons: over/under-fetching data is possible as applications become more complex
+  - **GraphQL** addresses the over/under-fetching limitations of REST APIs through **queries** and **mutations** (retrieving data and modifying data on the server respectively)
+    - Pros: operates through a single HTTP POST endpoint and enables clients to specify required data through a strongly-typed schema
+    - Cons: requires additional setup, tooling, and properly defining the schema in advance. Security could also be an issue since GraphQL enables clients to query any data they need
+  - **gRPC (Google Remote Procedure Call)** is a framework for executing RPCs which allows a program to execute a procedure on another computer or shared network. Used for server-server communication, it is most similar to WebSockets and providers bi-directional communication or multiplexing
+    - Pros: sends data using **protobufs (Protocol Buffers)** a language-neutral, platform-neutral extensible mechanism for serializing structured data to reduce payload and increase performance and efficiency
+    - Cons: does not support error codes provided by HTTP so server messages must be customized, requires additional setup and properly defining API contracts using protobufs
+
+- **JSON (JavaScript Object Notation)** is a widely used data format in web services where data is structured as key-value pairs
+
+### API Design
+
+- APIs provide **CRUD (Create, Read, Update, Delete)** functions which are equivalent to GET, POST, PUT, and DELETE HTTP/REST methods
+- It is important to consider backward compatibility when designing endpoint such that disruptions are avoided or minimized (e.g., adding an optional instead of a required parameter to an endpoint)
+- Incorporating `limit` and `offset` query parameters enables clients to specify a specific range or slice of records to retrieve
+- **API versioning** is used to document a significant change to an API such that developers can be able to make changes accordingly
