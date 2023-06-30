@@ -103,3 +103,24 @@ System design notes from NeetCode courses
 - It is important to consider backward compatibility when designing endpoint such that disruptions are avoided or minimized (e.g., adding an optional instead of a required parameter to an endpoint)
 - Incorporating `limit` and `offset` query parameters enables clients to specify a specific range or slice of records to retrieve
 - **API versioning** is used to document a significant change to an API such that developers can be able to make changes accordingly
+
+## 4. Caching Basics
+
+### Caching
+
+- **Caching** is taking a copy of the original data and bringing it closer to wherever a service is to increase throughput (e.g., CPU L1, L2, and L3 cache). To see comparison of typical latency numbers see [Latency Numbers You Should Know](https://blog.bytebytego.com/p/ep22-latency-numbers-you-should-know)
+- There are several common caching strategies:
+  - **Write-around** updates the primary data source first and defers writes to the cache (eventual consistency)
+  - **Write-through** updates the cache and primary data source to ensure consistency
+  - **Write-back** updates the cache but defers writes on the primary data source (eventual consistency)
+- The most common eviction policies for caching are:
+  - **FIFO (first-in, first-out)** evicts the oldest record from the cache first
+  - **LRU (least recently used)** evicts the least read record in the cache first
+  - **LFU (least frequently used)** evicts the least frequently read record in the cache first
+
+### CDNs
+
+- **CDNs (Content Delivery Networks)** brings static content closer to users and increases the reliability and availability of our system due to the distributed network
+- To distribute and deliver content CDNs can use different strategies:
+  - **Pull CDNs** are initiated by user request and content is pulled from the origin server by the CDN and stored on the CDN edge servers
+  - **Push CDNs** have content pushed to the CDN edge servers in advance by the origin server and requires more management by the content provider
