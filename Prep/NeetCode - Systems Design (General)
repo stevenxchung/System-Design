@@ -124,3 +124,28 @@ System design notes from NeetCode courses
 - To distribute and deliver content CDNs can use different strategies:
   - **Pull CDNs** are initiated by user request and content is pulled from the origin server by the CDN and stored on the CDN edge servers
   - **Push CDNs** have content pushed to the CDN edge servers in advance by the origin server and requires more management by the content provider
+
+## 5. Proxies
+
+### Proxies and Load Balancers
+
+- **Proxies** are servers which can act as a server between a client and a destination server (e.g., a VPN takes requests from a client and routes them to a destination server),
+- There are two common flavors of proxies:
+  - **Forward proxy** hides client information and provides communication with a destination server
+  - **Reverse proxy** hides destination server information and provides communication with a client (e.g., a CDN, load balancer, etc.)
+- **Load balancers** act as a reverse proxy to route/distribute requests evenly to a number of servers and can handle high throughput
+- There are a number of load balancing strategies:
+  - **Round robin** (also a weighted version) cycles through servers
+  - **Least connections** routes based on the number of connections to a server
+  - **Location-based** routes based on IP and geo-location, could be implemented by a layer 4 load balancer
+  - **Hashing** utilizes a hashing algorithm to determine the target server. This can help ensure session persistence since clients can be routed to the same server but could run into issues with consistent hashing if servers are removed or shuffled
+- There are different types of load balancers by layer:
+  - **Transport layer (layer 4)** is faster but less robust (typically provides routing only)
+  - **Application layer (layer 7)** is slower but more flexible (ability to provider application data)
+
+### Consistent Hashing
+
+- **Consistent hashing** aims to provide a balanced distribution of data while minimizing the impact of adding or removing nodes from the system by mapping hashed values to the nearest node in circular space (clockwise). Benefits of consistent hashing include:
+  - Load balancing: data is evenly distributed
+  - Scalability: nodes can be added or removed without impacting existing distribution
+  - Fault tolerance: only a portion of the data needs to be remapped
