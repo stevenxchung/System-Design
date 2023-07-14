@@ -149,3 +149,60 @@ System design notes from NeetCode courses
   - Load balancing: data is evenly distributed
   - Scalability: nodes can be added or removed without impacting existing distribution
   - Fault tolerance: only a portion of the data needs to be remapped
+
+## 6. Storage
+
+### SQL
+
+- **SQL (Standard Query Language)** provides a way to access and modify a **RDBMS (relational database management system)** which provides persistent storage. The DB tables and schemas must be created/specified in advance
+- **B+ Tree** is a balancing search tree data structure that is commonly used in computer science and database systems for efficient storage and retrieval of large amounts of data. It is an extension of the original B-tree data structure and has the following properties:
+  - Balanced tree
+  - Multiple keys per node
+  - Sorted order
+  - Lead node chaining
+  - Range queries
+  - Disk-based storage
+- **Foreign-key constraints** may be added to a table such that there is a relation established between two or more tables
+- **Primary keys** uniquely identifies every row in a table
+- Majority of RDBMS are **ACID** compliant to maintain data integrity, consistency, and reliability:
+  - **Atomic**: DB transactions cannot be split and are all-or-nothing commits
+  - **Consistent**: to ensure valid state for reads/writes based on constraints
+  - **Isolated**: DB transactions are serialized even if they are concurrent
+  - **Durable**: persistent storage, DB transactions are stored when committed
+
+### NoSQL
+
+- **NoSQL (Not Only SQL)** are non-relational stores which consists of many different flavors and have the ability to scale much more readily than traditional RDBMS. NoSQK DBs are more flexible than traditional RDBMS since they do not require a schema to be specified in advance
+- Common NoSQL DBs include:
+  - **Document stores** are key-value documents or collections of JSON objects which may be nested within a larger JSON
+  - **Wide-column DBs** are optimized for writes and are best for when reads and updates do not occur often (e.g., Cassandra, BigTable, etc.). This type of DB is well-suited for handling time-series data and large-scale analytics
+  - **Graph DBs** designed to store and process graph-like structures with nodes, edges, and properties
+- ACID is not a standard guarantee for NoSQL databases as they typically exhibit **eventual consistency** where reading a replica DB could return stale data after a write but eventually converges with the leader DB
+
+### Replication and Sharding
+
+- **Replication** is the process of copying data from a primary DB to a replica DB and can be done synchronously (strong read consistency) or asynchronously (eventual read consistency), two most common replication strategies include:
+  - **Leader-follower** where a replica DB (follower) converges with data on the leader DB over time. Leader DBs permit read/write access but replica DBs are read only (e.g., read replicas)
+  - **Leader-leader** where two leader DBs converges with each other over time. Can be useful to scale up reads and writes but could be more complicated to have consistent leader DBs
+- **Sharding** is a data partitioning technique to horizontally divide and distribute data across multiple nodes or shards. A large dataset is split into smaller, more manageable subsets called shards, and each shard is stored on a separate database server or node. Types of sharding include:
+  - **Range-based** data is split based on a range of values
+  - **Hash-based** data is split based on a hash function (consistent hashing is useful here!)
+  - **Key-value based** data is split based on specific keys are attributes that are relevant to the application
+- A **shard key** is a partition key or hash key, is a field or attribute used to determine how data is distributed and assigned to different shards in a sharded database system. It is a crucial component of sharding strategies and helps in the efficient partitioning of data across multiple nodes
+- Note that sharding means that ACID compliance is lost for traditional RDBMS in favor of scalability whereas NoSQL databases readily support sharding/partitioning
+
+### CAP Theorem
+
+- **CAP Theorem** states that in a distributed computer system, it is impossible to simultaneously guarantee all of the following properties:
+  - **Consistency (C)**: every read operation receives the most recent write or an error. Consistency ensures that all nodes in a distributed system agree on the state of the data at any given time
+  - **Availability (A)**: every request receives a response, without any errors, as long as at least one node in the system is functioning correctly. Availability ensures that the system remains operational even in the presence of failures
+  - **Partition tolerance (P)**: the system continues to operate and provide consistent and available services even in the presence of network partitions or communication failures that may split the system into multiple disjoint subsets of nodes
+- According to the CAP theorem, in the event of a network partition or failure, a distributed system must choose between maintaining _consistency_ or _availability_. It is not possible to have both simultaneously
+- **PACELC** is an extension of the CAP theorem and factors in behavior of distributed systems during network partition and defines three consistency models (as noted by CAP Theorem above) and defines one more property:
+  - **Latency (L)**: refers to the response time or delay in a distributed system. It considers the trade-off between consistency and the time it takes to propagate updates across the system
+- Generally, under PACELC, given network partitioning (P) in a distributed computer system, one has to choose between availability (A) and consistency (C) (as per the CAP theorem), but else (E), even when the system is running normally in the absence of partitions, one has to choose between latency (L) and consistency (C)
+
+### Object Storage
+
+- **Object storage** or **BLOB (Binary Larger Object) Storage** is a data storage architecture that manages data as objects rather than traditional file hierarchies or block addresses. It is designed to store and retrieve large volumes of unstructured data, such as files, documents, images, videos, and other multimedia content
+- Object storage is _flat_ (mapped to unique HTTP/HTTPS namespace) and provides a more flexible and scalable approach to data storage, enabling efficient management of large volumes of unstructured data without the limitations imposed by hierarchical file systems
