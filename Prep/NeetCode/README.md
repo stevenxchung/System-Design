@@ -4,6 +4,11 @@ System design notes from NeetCode courses
 
 ## 1. Background
 
+- System design interviews typically focus on a smaller feature or subset of a product and aims to test understanding of distributed systems as well as communication
+- Always scope out requirements:
+  - **Functional**: define what the software system or application should do in terms of specific functionalities, features, and behavior. They describe the intended behavior of the system and outline the expected outputs or results
+  - **Non-functional**: define the qualities or characteristics of the software system, specifying how it should behave and perform. They focus on aspects beyond the core functionalities, addressing areas such as performance, security, reliability, usability, scalability, and maintainability
+
 ### Computer Architecture
 
 - Disks are **persistent**, data lives whether computer is in on/off state
